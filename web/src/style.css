@@ -1,0 +1,271 @@
+/* ============================================================
+   康迹 · 全局设计系统
+   设计语言：清晨浅色工作台 + 康迹蓝主操作 + 低饱和健康绿反馈
+   ============================================================ */
+
+:root {
+  color-scheme: light;
+
+  /* 表面分层（由深到浅） */
+  --bg: #f6faf8;
+  --bg-soft: #edf6f1;
+  --card: #ffffff;
+  --card-hover: #f8fcfa;
+  --panel: #f0f8f4;
+
+  /* 线条 */
+  --border: #d8e6de;
+  --border-soft: #e4eee8;
+
+  /* 文字 */
+  --text: #17212b;
+  --text-dim: #667685;
+  --text-faint: #94a3ad;
+
+  /* 主色（医疗蓝）与衍生 */
+  --accent: #2563eb;
+  --accent-strong: #1d4ed8;
+  --accent-dim: rgba(37, 99, 235, 0.1);
+  --accent-glow: rgba(37, 99, 235, 0.2);
+
+  /* 语义色 */
+  --ok: #16a34a;
+  --ok-dim: rgba(22, 163, 74, 0.1);
+  --danger: #dc2626;
+  --danger-dim: rgba(220, 38, 38, 0.08);
+  --warn: #d97706;
+  --warn-dim: rgba(217, 119, 6, 0.1);
+  --violet: #7c3aed;
+
+  /* 圆角与阴影 */
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 16px;
+  --shadow-card: 0 1px 2px rgba(22, 33, 43, 0.05), 0 12px 34px rgba(47, 92, 72, 0.08);
+  --shadow-pop: 0 20px 56px rgba(47, 92, 72, 0.14);
+
+  /* 动效 */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'PingFang SC', 'HarmonyOS Sans SC', 'Microsoft YaHei', system-ui,
+    -apple-system, sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* 顶部微渐变，打破纯平背景 */
+body {
+  background:
+    radial-gradient(900px 340px at 18% -120px, rgba(37, 99, 235, 0.1), transparent 72%),
+    radial-gradient(760px 320px at 88% -80px, rgba(22, 163, 74, 0.09), transparent 70%),
+    linear-gradient(90deg, rgba(216, 230, 222, 0.24) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(216, 230, 222, 0.24) 1px, transparent 1px),
+    var(--bg);
+  background-size: auto, auto, 56px 56px, 56px 56px, auto;
+  background-attachment: fixed;
+}
+
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+::selection {
+  background: var(--accent-dim);
+  color: var(--accent-strong);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.15s var(--ease);
+}
+
+a:hover {
+  color: var(--accent-strong);
+}
+
+/* ---------- 按钮体系 ---------- */
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  padding: 6px 14px;
+  transition: background 0.15s var(--ease), border-color 0.15s var(--ease),
+    box-shadow 0.15s var(--ease), transform 0.1s var(--ease);
+}
+
+button:hover {
+  background: var(--card-hover);
+  border-color: #bed5ca;
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--accent-glow);
+  outline-offset: 1px;
+}
+
+button.primary {
+  background: linear-gradient(180deg, #3678f4, #2563eb);
+  border-color: #2563eb;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.22);
+}
+
+button.primary:hover {
+  background: linear-gradient(180deg, #4b8bff, #2d6df1);
+  border-color: #1d4ed8;
+  box-shadow: 0 12px 28px var(--accent-glow);
+}
+
+button.danger {
+  color: var(--danger);
+}
+
+button.danger:hover {
+  background: var(--danger-dim);
+  border-color: var(--danger);
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ---------- 表单 ---------- */
+
+input,
+select,
+textarea {
+  font: inherit;
+  background: #fff;
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  padding: 8px 11px;
+  outline: none;
+  transition: border-color 0.15s var(--ease), box-shadow 0.15s var(--ease);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-dim);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-faint);
+}
+
+/* ---------- 布局 ---------- */
+
+.page {
+  flex: 1;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 20px 24px 36px;
+}
+
+/* ---------- 通用元素 ---------- */
+
+/* 卡片：洞察页/设置页/时间线共用 */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.18s var(--ease), transform 0.18s var(--ease);
+}
+
+.card:hover {
+  border-color: #c8ddd2;
+}
+
+/* 数字用等宽数字，表格/图表对齐更稳 */
+.num,
+td,
+th {
+  font-variant-numeric: tabular-nums;
+}
+
+h2 {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin: 0 0 4px;
+}
+
+h3 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: var(--text-dim);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* ---------- 滚动条 ---------- */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c8d9d0;
+  border-radius: 6px;
+  border: 2px solid var(--bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #acc4b8;
+}
+
+/* ---------- 移动端密度 ---------- */
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+  .page {
+    padding: 14px 12px 24px;
+  }
+  button {
+    padding: 6px 12px;
+  }
+}

@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+build/
+
+# Node
+node_modules/
+web/dist/
+web/coverage/
+web/playwright-report/
+web/test-results/
+
+# Test / tooling caches
+.pytest_cache/
+.mypy_cache/
+graphify-out/
+work/
+_inspect*.py
+
+# 运行时数据（含健康隐私，绝不入库）
+data/
+/assets/
+*.sqlite3
+*.db
+
+# 密钥与环境
+.env
+.env.*
+!.env.example
+!**/.env.example
+*.key
+
+# IDE / 系统
+.idea/
+.vscode/
+Thumbs.db
+.DS_Store
+
+# 日志
+*.log
