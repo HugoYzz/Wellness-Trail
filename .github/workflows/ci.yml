@@ -23,7 +23,6 @@ jobs:
       - name: Run backend tests
         env:
           PYTHONPATH: server
-          LLM_DEFAULT_PROVIDER: mock
           RAG_VECTOR_ENABLED: '0'
         run: python -m unittest discover -s server/tests -v
 
